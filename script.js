@@ -105,6 +105,10 @@ const VoiceRSS = {
   },
 };
 
+// Disable/Enable Button
+function toggleButton() {
+  button.disabled = !button.disabled;
+}
 //  Passing Joke to VoiceRSS API
 function tellME(joke) {
   console.log('telle me', joke);
@@ -133,10 +137,15 @@ async function getJokes() {
     } else {
       joke = data.joke;
     }
+    // Text
     tellME(joke);
+    // Disable Button
+    toggleButton();
   } catch (error) {
     // Catch Error
     console.log('Yoh', error);
   }
 }
-getJokes();
+// Event Listeners
+button.addEventListener('click', getJokes);
+audioElement.addEventListener('ended', toggleButton);
